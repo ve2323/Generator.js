@@ -40,10 +40,10 @@ This project consist of base code aswell as a minified version.
     - call as . control(function(tag, proto){console.log(tag);})
       - takes a function as argument and returns tag and prototype object as callback
  - Properties:
-  - .name
-    - will provide the object name
-  - .element
-    - will return generated element as node
+   - .name
+     - will provide the object name
+   - .element
+     - will return generated element as node
 - Anonymous:
   - docbody()
     - returns document.body
