@@ -108,13 +108,13 @@ Generator.init({
 });
 
 // automatically run functions specified in object
-	// params can be set by setting key value to object containing function and params
-	// ^The first instance of key value object will trigger as the main function and the second instance will trigger as param
-	Generator.addFunc({
-		spam:function(){console.log("You've got mail!");},
-		kitten:function(){console.log("Meow");},
-		arc:{func:function(item){console.log(item.text);},item:{text:"I'm a param!"}}
-	});
+// params can be set by setting key value to object containing function and params
+// ^The first instance of key value object will trigger as the main function and the second instance will trigger as param
+Generator.addFunc({
+	spam:function(){console.log("You've got mail!");},
+	kitten:function(){console.log("Meow");},
+	arc:{func:function(item){console.log(item.text);},item:{text:"I'm a param!"}}
+});
 
 // builds h1 element with the text 'hello world'
 // sets attributes id="id" and class="class"
