@@ -5,6 +5,13 @@ var Generator = {
 		tags=(isObject(creation))?creation:allTags;
     	for(var t in tags){corrolation(t);}
     	return this;
+	},
+	addFunc: function(func){
+		if(exist(func)&&isObject(func)){
+			for(var f in func){if(isFunc(func[f])){(func[f])();} else{
+				if(isObject(func[f])){(func[f][Object.keys(func[f])[0]])(func[f][Object.keys(func[f])[1]]);} 
+			}}
+		}
 	}
 }; function corrolation(name, fresh){
 	var element = (isBoolean(fresh)&&fresh) ? name : tags[name];
@@ -22,6 +29,7 @@ function exist(item){return item != 'undefined' && item != null;}
 function isString(item){return typeof(item) === 'string';}
 function isObject(item){return typeof(item) === 'object';}
 function isBoolean(item){return typeof(item) === 'boolean';}
+function isFunc(item){return typeof(item) === 'function';}
 
 /* Desolate */
 // set prototype functions
@@ -76,7 +84,7 @@ function append(container, element){container.appendChild(element);}
 function docbody(){return document.body;}
 function getSelection(){return clone;}
 function selectionNames(){var list=[]; for(var key in clone){list.push(key)} return list;}
-function destroy(object){for(var key in object){delete window[key]; delete clone[key];}}
+function destroy(list){for(var key in list){delete window[list[key]]; delete clone[list[key]];}}
 function revive(list){for(var key in list){if((list[key] in tags)){corrolation(tags[list[key]], true)}}}
 function rewrite(object){for(var key in object){if(exist(window[key])){window[object[key]]=window[key]; delete window[key];}}}
 function mutate(tag, mutation, countdown) {setTimeout(function(){tag.parentNode.replaceChild(new DOMParser().parseFromString(tag.outerHTML.replace(new RegExp(tag.tagName,'ig'),mutation),"text/html").body.childNodes[0],tag);},(exist(countdown))?countdown:0);}
