@@ -5,8 +5,8 @@ This project consist of base code aswell as a minified version.
 - Created using pure javascript.
 - No dependencies.
 - File size:
-  - Base file size: 5,05kb
-  - Minified file size: 3,65kb
+  - Base file size: 5,36kb
+  - Minified file size: 3,84kb
 
 ## Functionality
 - Generate function-names specified through object key
@@ -16,6 +16,11 @@ This project consist of base code aswell as a minified version.
         - will create specified functions which in turn can be called to create elements/nodes
           - if no param is specified all possible functions based on tagnames will be generated automatically
         - !important required in order to use project functionality
+    - Generator.addFunc(*object specifying what functions to execute*)
+      - Will execute automatically as soon as added
+      - Possibility to add params in secondary object key on secondary object level
+        - Structured as: Generator.addFunc({<*object key*>:{<*function key*>:<*object function*>,<*param key*>:<*param*>}});
+      - Note: Currently in development
   - Pass object into function to set node values
     - unique keys as follows:
       - text:"*insert innerhtml here*"
@@ -55,10 +60,8 @@ This project consist of base code aswell as a minified version.
   - selectionNames()
     - returns a list of all currently callable functions
   - destroy()
-    - call as destroy(*object specifying which functions to destroy*)
-      - structured as key:*value*
+    - call as destroy(*list specifying which functions to destroy*)
       - destroys all specified functions
-      - NOTE: param will be changed to list instead of object in a near future
   - revive()
     - call as revive(*list of function names to revive*)
       - will attempt to revive destroyed functions
@@ -83,6 +86,8 @@ This project consist of base code aswell as a minified version.
     - checks if param is object
   - isBoolean(*param*)
     - checks if param is boolean
+  - isFunc(*param*)
+    - checks if param is function
 
 ## Example code
 ```
@@ -101,6 +106,15 @@ Generator.init({
   button:"button",
   test:"test-tag"
 });
+
+// automatically run functions specified in object
+	// params can be set by setting key value to object containing function and params
+	// ^The first instance of key value object will trigger as the main function and the second instance will trigger as param
+	Generator.addFunc({
+		spam:function(){console.log("You've got mail!");},
+		kitten:function(){console.log("Meow");},
+		arc:{func:function(item){console.log(item.text);},item:{text:"I'm a param!"}}
+	});
 
 // builds h1 element with the text 'hello world'
 // sets attributes id="id" and class="class"
